@@ -1,0 +1,86 @@
+import math
+
+# User Input for Initial Velocity, Angle that object is projected at and the Mass of object
+u=int(input('Enter the initial velocity: '))
+angle=int(input('Enter the angle of projection: '))
+mass=int(input('Enter the mass of the object: '))
+
+# Value of Gravity constant
+g=9.8
+
+# Calcute Initial Velocity in the vertical and horizontal vector
+horizontal_velocity=round(u*math.cos(math.radians(angle)),2)
+vertical_initial_velocity=round(u*math.sin(math.radians(angle)),2)
+print('Initial Vertical velocity: ', vertical_initial_velocity, 'm/s')
+
+#Calculate Height using v2=u2+2as equation 
+height =round(((vertical_initial_velocity**2)/(2*g)),2)
+print('Height: ', height, 'm')
+
+# Calculate time using v=u+at equation 
+t=round(((vertical_initial_velocity)/(g)),2)
+
+# Calculate Horizontal distance using s=ut equation
+xh=round((horizontal_velocity*t),2)
+print('Horizontal velocity: ', horizontal_velocity, 'm/s')
+print('Horizontal distance: ', xh, 'm')
+print('The gravity constant: 9.81 m/s**')
+
+# Calculate trajectory to plot as a graph for distance
+trajectoryax=round(math.tan(math.radians(angle)),2)
+trajectoryax2=round(g/(2*(((vertical_initial_velocity)*(math.cos(math.radians(angle))))**2)),5)
+
+import matplotlib.pyplot as plt
+from matplotlib.pyplot import *
+from numpy import *
+
+x=linspace(-1,xh,5000)
+y=((-1*trajectoryax2)*x**2)+(trajectoryax*x)
+plt.plot(x,y)
+plt.xlabel("x (m)")
+plt.ylabel("y (m)")
+fig, ax=plt.subplots()
+ax.set_xlim(xh/2)
+plt.show()
+
+# User Input for the range of both balls and the angle that ball is projected at
+r=int(input('Enter the range: '))
+r1=int(input('Enter the range: '))
+anglea=int(input('Enter the angle: '))
+anglea1=int(input('Enter the angle: '))
+
+#Value for Gravity Constant
+g=9.80
+
+# Calculate Initial velocity of balls using Range equation
+initial_velocity=round(math.sqrt((r*g)/(math.sin(math.radians(2*anglea)))),2)
+initial_velocity1=round(math.sqrt((r1*g)/(math.sin(math.radians(2*anglea1)))),2)
+print('Initial velocity of first: ', initial_velocity)
+print('Initial velocity of second: ', initial_velocity1)
+
+# Calculate trajectory using trajectory equation
+trajectoryx=round(math.tan(math.radians(anglea)),2)
+trajectoryx2=round(g/(2*(((initial_velocity)*(math.cos(math.radians(anglea))))**2)),5)
+print('Trajectory of Secondhole: ', trajectoryx, 'x -', trajectoryx2, 'x2')
+trajectoryx1=round(math.tan(math.radians(anglea1)),2)
+trajectoryx21=round(g/(2*(((initial_velocity1)*(math.cos(math.radians(anglea1))))**2)),5)
+print('Trajectory of Secondhole: ', trajectoryx1, 'x -', trajectoryx21, 'x2')
+
+
+import matplotlib.pyplot as plt
+from matplotlib.pyplot import *
+from numpy import *
+
+x=linspace(-1,r,5000)
+y=((-1*trajectoryx2)*x**2)+(trajectoryx*x)
+y1=((-1*trajectoryx21)*x**2)+(trajectoryx1*x)
+plt.plot(x,y)
+plt.plot(x,y1)
+plt.xlabel("x (m)")
+plt.ylabel("y (m)")
+plt.title('Golf Ball')
+fig, ax=plt.subplots()
+ax.set_ylim(0)
+plt.show()
+
+
